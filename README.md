@@ -1,4 +1,4 @@
-# 云游者 · The Wandering Lyre
+# Echoland
 
 A pure idle game about a busking bard, and a phone widget you can leave on a
 scenic overlook. Play happens while you are gone: you come back, take the
