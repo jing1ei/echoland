@@ -1,0 +1,36 @@
+{
+  "name": "wandering-lyre",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 5173",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
+    "build:gm": "tsc --noEmit && VITE_GM=1 vite build --outDir dist-gm --emptyOutDir",
+    "preview": "vite preview --host 0.0.0.0 --port 4179 --strictPort",
+    "preview:gm": "vite preview --outDir dist-gm --host 0.0.0.0 --port 4180 --strictPort",
+    "test": "python3 tests/run_all.py",
+    "audit": "python3 tests/audit_world.py",
+    "check": "npm run typecheck && npm run build && npm run build:gm && npm test"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

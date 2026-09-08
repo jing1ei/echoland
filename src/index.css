@@ -1,0 +1,553 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #2b2419;
+  --ink-soft: #5a4f3d;
+  --parch: #f6efdf;
+  --parch-2: #ece0c6;
+  --brass: #b8873f;
+  --brass-lt: #d9ae63;
+  --wine: #7b3b46;
+  --moss: #5c6a45;
+  color-scheme: light;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #14161c;
+  font-family: 'Noto Serif SC', 'Cormorant Garamond', serif;
+  color: var(--ink);
+  overscroll-behavior: none;
+}
+
+/* ---------- paper surfaces ---------- */
+
+.paper {
+  background-color: var(--parch);
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(184, 135, 63, 0.09), transparent 42%),
+    radial-gradient(circle at 84% 78%, rgba(123, 59, 70, 0.07), transparent 46%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(43, 36, 25, 0.014) 0px,
+      rgba(43, 36, 25, 0.014) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+}
+
+.paper-edge {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(43, 36, 25, 0.1),
+    0 8px 26px -14px rgba(0, 0, 0, 0.55);
+}
+
+.hairline {
+  border: 1px solid rgba(43, 36, 25, 0.16);
+}
+
+.glass {
+  background: rgba(20, 18, 24, 0.42);
+  backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.glass-lt {
+  background: rgba(246, 239, 223, 0.82);
+  backdrop-filter: blur(16px) saturate(1.1);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  border: 1px solid rgba(43, 36, 25, 0.12);
+}
+
+/* ---------- type ---------- */
+
+.display {
+  font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  letter-spacing: 0.01em;
+  /* Cormorant ships old-style figures by default, which renders "1" as a
+     glyph that reads like a lowercase "I". Force lining figures everywhere
+     so numbers in the UI are unambiguous. */
+  font-variant-numeric: lining-nums;
+  font-feature-settings: 'lnum' 1, 'onum' 0;
+}
+
+.ui {
+  font-family: 'Outfit', 'Noto Sans SC', system-ui, sans-serif;
+}
+
+.tnum {
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: 'lnum' 1, 'onum' 0, 'tnum' 1;
+}
+
+.tracking-wider-2 {
+  letter-spacing: 0.18em;
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  transition:
+    transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.16s,
+    filter 0.16s;
+  user-select: none;
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.985);
+}
+
+.btn-brass {
+  background: linear-gradient(160deg, #e6bd76 0%, #c8913f 46%, #a97528 100%);
+  color: #2a1f0d;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -2px 0 rgba(83, 53, 12, 0.35),
+    0 10px 24px -12px rgba(168, 116, 40, 0.9);
+}
+
+.btn-brass:disabled {
+  filter: grayscale(0.55) brightness(0.94);
+  box-shadow: none;
+}
+
+.btn-ink {
+  background: linear-gradient(160deg, #40382c 0%, #2b2419 100%);
+  color: var(--parch);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 8px 20px -12px rgba(0, 0, 0, 0.8);
+}
+
+.btn-quiet {
+  background: rgba(43, 36, 25, 0.06);
+  color: var(--ink);
+  border: 1px solid rgba(43, 36, 25, 0.16);
+}
+
+/* ---------- misc ---------- */
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.sheet-enter {
+  animation: sheetUp 0.36s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes sheetUp {
+  from {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.stagger > * {
+  animation: sheetUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.stagger > *:nth-child(1) { animation-delay: 0.02s; }
+.stagger > *:nth-child(2) { animation-delay: 0.06s; }
+.stagger > *:nth-child(3) { animation-delay: 0.1s; }
+.stagger > *:nth-child(4) { animation-delay: 0.14s; }
+.stagger > *:nth-child(5) { animation-delay: 0.18s; }
+.stagger > *:nth-child(6) { animation-delay: 0.22s; }
+.stagger > *:nth-child(7) { animation-delay: 0.26s; }
+.stagger > *:nth-child(8) { animation-delay: 0.3s; }
+
+.shimmer {
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  background-size: 200% 100%;
+  animation: sheenMove 2.4s linear infinite;
+}
+
+@keyframes sheenMove {
+  from {
+    background-position: 180% 0;
+  }
+  to {
+    background-position: -80% 0;
+  }
+}
+
+.pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 999px;
+  border: 1px solid rgba(217, 174, 99, 0.75);
+  animation: ring 1.9s ease-out infinite;
+}
+
+@keyframes ring {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1.18);
+    opacity: 0;
+  }
+}
+
+/* The canvas already lays down its own text scrims, so these stay light —
+   stacking two full-strength vignettes crushed daylight scenes to near black. */
+.vignette-top {
+  background: linear-gradient(to bottom, rgba(10, 8, 12, 0.34), rgba(10, 8, 12, 0.08) 58%, transparent);
+}
+
+.vignette-bottom {
+  background: linear-gradient(to top, rgba(10, 8, 12, 0.4), rgba(10, 8, 12, 0.1) 55%, transparent);
+}
+
+/* white copy over live scenery: a soft shadow beats a heavier scrim */
+.legible {
+  text-shadow: 0 1px 12px rgba(8, 6, 10, 0.6), 0 0 2px rgba(8, 6, 10, 0.45);
+}
+
+/* header copy sits on top of whatever the sky is doing right now, which at
+   midday can be near-white. A short, tight shadow keeps it readable without
+   dropping a heavy panel over the view. */
+.legible-strong {
+  text-shadow:
+    0 1px 2px rgba(8, 6, 10, 0.85),
+    0 2px 14px rgba(8, 6, 10, 0.7),
+    0 0 1px rgba(8, 6, 10, 0.6);
+}
+
+/* ---------- layout helpers ---------- */
+
+/* clears the floating tab bar (52px pill + 10px gutter) plus the home bar */
+.pb-nav {
+  padding-bottom: calc(132px + env(safe-area-inset-bottom));
+}
+
+/* bottom sheets end at the screen edge, so their last row needs the inset */
+.sheet-body {
+  padding-bottom: calc(28px + env(safe-area-inset-bottom));
+}
+
+.rule {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(43, 36, 25, 0.28) 12%,
+    rgba(43, 36, 25, 0.28) 88%,
+    transparent
+  );
+}
+
+.rule-lt {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.3) 12%,
+    rgba(255, 255, 255, 0.3) 88%,
+    transparent
+  );
+}
+
+.stamp {
+  border: 1.5px solid rgba(123, 59, 70, 0.5);
+  color: rgba(123, 59, 70, 0.85);
+  transform: rotate(-6deg);
+  letter-spacing: 0.22em;
+}
+
+input[type='range'] {
+  -webkit-appearance: none;
+  height: 3px;
+  background: rgba(43, 36, 25, 0.2);
+  border-radius: 3px;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, #e6bd76, #b8873f);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* text inputs only exist in settings, so they get one shared look rather
+   than a component: paper-coloured, hairline, no heavy chrome */
+.field {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13.5px;
+  color: #2b2419;
+  background: rgba(255, 253, 246, 0.78);
+  border: 1px solid rgba(43, 36, 25, 0.16);
+  border-radius: 12px;
+  padding: 9px 12px;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.field:focus {
+  border-color: rgba(184, 135, 63, 0.7);
+  box-shadow: 0 0 0 3px rgba(184, 135, 63, 0.14);
+}
+.field::placeholder {
+  color: rgba(90, 80, 64, 0.45);
+}
+
+/* the stage can hide every control to become a pure window; fading rather
+   than unmounting keeps the scenery from reflowing under the change */
+.ui-fade {
+  transition: opacity 0.42s ease, transform 0.42s ease;
+}
+.ui-fade[data-hidden='true'] {
+  opacity: 0;
+  pointer-events: none;
+}
+.ui-fade[data-hidden='true'].from-top {
+  transform: translateY(-10px);
+}
+.ui-fade[data-hidden='true'].from-bottom {
+  transform: translateY(14px);
+}
+
+.grain {
+  background-image: radial-gradient(rgba(80, 62, 32, 0.16) 0.5px, transparent 0.5px),
+    radial-gradient(rgba(80, 62, 32, 0.1) 0.5px, transparent 0.5px);
+  background-size: 7px 7px, 11px 11px;
+  background-position: 0 0, 3px 4px;
+}
+
+.nav-tab {
+  position: relative;
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 7px 0 5px;
+  border-radius: 14px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.nav-tab[data-on='true'] {
+  background: rgba(184, 135, 63, 0.16);
+}
+
+.notch {
+  position: absolute;
+  top: 4px;
+  right: 50%;
+  margin-right: -16px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #a03a3a;
+  box-shadow: 0 0 0 2px rgba(255, 253, 246, 0.9);
+}
+
+/* content scrolls under the floating tab bar; this fade makes that read as
+   intentional instead of looking like a clipped layout */
+.nav-scrim {
+  background: linear-gradient(to top, rgba(244, 236, 220, 0.98) 18%, rgba(244, 236, 220, 0.72) 55%, rgba(244, 236, 220, 0));
+}
+
+/* ============================================================
+   AVG layer
+   ============================================================ */
+
+/* reward chips rise off the dialogue box as they are earned */
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.94);
+  }
+  16% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  72% {
+    opacity: 1;
+    transform: translateY(-14px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
+.float-up {
+  animation: floatUp 2.2s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+  backdrop-filter: blur(2px);
+}
+
+/* the blinking bar that trails the typewriter */
+.caret {
+  display: inline-block;
+  width: 0.52em;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: -0.16em;
+  background: currentColor;
+  opacity: 0.5;
+  animation: caretBlink 0.85s steps(1, end) infinite;
+}
+
+@keyframes caretBlink {
+  50% {
+    opacity: 0.05;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-up {
+    animation-duration: 2.2s;
+  }
+  .caret {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   Weather overlay
+
+   The mask over the scenery. Every number that matters (counts, speeds,
+   colours, opacities) is content — see content/weather/art.ts — so these
+   rules only describe the four motions weather can have: falling,
+   wandering down, drifting sideways, and flashing.
+   ============================================================ */
+
+.wx-fall {
+  animation-name: wxFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+@keyframes wxFall {
+  from {
+    transform: translate3d(0, -30%, 0);
+  }
+  to {
+    transform: translate3d(0, 130vh, 0);
+  }
+}
+
+.wx-flake {
+  animation-name: wxFlake;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+@keyframes wxFlake {
+  from {
+    transform: translate3d(0, -8vh, 0);
+  }
+  50% {
+    transform: translate3d(var(--wx-drift, 12px), 52vh, 0);
+  }
+  to {
+    transform: translate3d(0, 116vh, 0);
+  }
+}
+
+.wx-band,
+.wx-gust {
+  animation-name: wxDrift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+@keyframes wxDrift {
+  from {
+    transform: translate3d(-60%, 0, 0);
+  }
+  to {
+    transform: translate3d(110%, 0, 0);
+  }
+}
+
+/* one bright stab, then a weaker echo, then a long wait */
+.wx-flash {
+  opacity: 0;
+  animation-name: wxFlash;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+  mix-blend-mode: screen;
+}
+
+@keyframes wxFlash {
+  0%,
+  88% {
+    opacity: 0;
+  }
+  89% {
+    opacity: var(--wx-flash-opacity, 0.5);
+  }
+  91% {
+    opacity: 0.05;
+  }
+  93% {
+    opacity: calc(var(--wx-flash-opacity, 0.5) * 0.6);
+  }
+  97%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wx-fall,
+  .wx-flake,
+  .wx-band,
+  .wx-gust,
+  .wx-flash {
+    animation-duration: 12s;
+  }
+}

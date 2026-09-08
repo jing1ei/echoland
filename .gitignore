@@ -1,0 +1,16 @@
+node_modules/
+tsconfig.tsbuildinfo
+.DS_Store
+
+# build output. `dist/` is what gets deployed, but it is generated —
+# `npm run build` remakes it in two seconds and a committed bundle turns
+# every review into a diff of minified JavaScript.
+dist/
+# tester build with the GM layer in it — never deploy this one
+dist-gm/
+
+# screenshots from tests/shoot.py
+shots/
+
+__pycache__/
+*.pyc
